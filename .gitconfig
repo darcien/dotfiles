@@ -1,0 +1,17 @@
+[core]
+	editor = micro
+[alias]
+	hist = log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short -n 15
+  hist2 = log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short
+  s = status -s
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+	lgt = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --tags
+	pure = pull upstream master --rebase
+	co = checkout
+[user]
+	name = Yosua Ian Sebastian
+	email = developer@darcien.dev
+[init]
+	defaultBranch = master
+[merge]
+	conflictstyle = zdiff3

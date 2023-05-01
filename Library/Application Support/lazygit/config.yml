@@ -1,0 +1,30 @@
+customCommands:
+  - key: "<c-p>"
+    command: "git push -u {{index .PromptResponses 0}} --no-verify --force-with-lease"
+    context: "files"
+    description: "Push without verify and force with lease"
+    prompts:
+      - type: "input"
+        title: "Enter upstream as <remote> <branchname>"
+        initialValue: "{{.SelectedRemote.Name}} {{.SelectedLocalBranch.Name}}"
+  - key: "<c-r>"
+    command: "gh pr create --web"
+    context: "global"
+    loadingText: "Create pull request on GitHub"
+  - key: "<c-a>"
+    description: "Amend the author of last commit"
+    command: 'git commit --amend --author="{{index .PromptResponses 0}} <{{index .PromptResponses 1}}>"'
+    context: "commits"
+    subprocess: true
+    prompts:
+      - type: "input"
+        title: "Author Name"
+        initialValue: ""
+      - type: "input"
+        title: "Email Address"
+        initialValue: ""
+  - key: "<c-a>"
+    description: "Amend last commit without edit and verify"
+    command: "git commit --amend --no-edit --no-verify"
+    context: "files"
+    subprocess: true
