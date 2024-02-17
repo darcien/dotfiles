@@ -6,8 +6,12 @@ fi
 # https://github.com/Peltoche/lsd
 alias ls='lsd'
 alias lg='lazygit'
-alias codei='code-insiders'
-alias code='code-insiders'
+alias ld='lazydocker'
+
+# Regular VS Code no longer crashing,
+# disabling insiders for now.
+# alias codei='code-insiders'
+# alias code='code-insiders'
 
 # navigation aliases
 alias p="cd ~/projects/"
@@ -47,7 +51,9 @@ alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 # export BROWSER="Arc"
 
 # fnm
-eval "$(fnm env)"
+# eval "$(fnm env)"
+# switch to use-on-cd on 2024-01-21 so node version is always correct on different project
+eval "$(fnm env --use-on-cd)"
 
 # load rbenv for ruby automatically
 eval "$(rbenv init -)"
@@ -112,6 +118,12 @@ unset __conda_setup
 # https://github.com/ohmyzsh/ohmyzsh/issues/449#issuecomment-6973326
 # Happening since switching from omz to pure setup
 setopt NO_NOMATCH
+
+# Remove command lines from the history list when the first character on the line is a space, or when one of the expanded aliases contains a leading space.
+# Only normal aliases (not global or suffix aliases) have this behaviour.
+# Note that the command lingers in the internal history until the next command is entered before it vanishes, allowing you to briefly reuse or edit the line.
+# If you want to make it vanish right away without entering another command, type a space and press return.
+setopt HIST_IGNORE_SPACE
 
 # Cycle through history based on characters already typed on the line
 autoload -U up-line-or-beginning-search
