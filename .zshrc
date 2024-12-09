@@ -5,6 +5,9 @@ fi
 # Prefer ls deluxe over regular ls
 # https://github.com/Peltoche/lsd
 alias ls='lsd'
+# https://github.com/sharkdp/bat
+alias cat='bat'
+
 alias lg='lazygit'
 alias ld='lazydocker'
 
@@ -69,21 +72,6 @@ else
   export EDITOR='code --wait'
 fi
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/darcien/miniconda/bin/conda' 'shell.zsh' 'hook' 2>/dev/null)"
-if [ $? -eq 0 ]; then
-  eval "$__conda_setup"
-else
-  if [ -f "/Users/darcien/miniconda/etc/profile.d/conda.sh" ]; then
-    . "/Users/darcien/miniconda/etc/profile.d/conda.sh"
-  else
-    export PATH="/Users/darcien/miniconda/bin:$PATH"
-  fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
 # Zinit disabled for now, no use other than https://github.com/joshskidmore/zsh-fzf-history-search
 # which got replaced by mcfly
 # # From zinit install script
@@ -132,6 +120,11 @@ zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 bindkey "^[[A" up-line-or-beginning-search
 bindkey "^[[B" down-line-or-beginning-search
+
+# Homebrew managed shell completion,
+# must be done before `compinit` is called
+# https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
+FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 
 # Needed for completion
 autoload -Uz compinit
