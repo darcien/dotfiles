@@ -6,7 +6,7 @@ customCommands:
     prompts:
       - type: "input"
         title: "Enter upstream as <remote> <branchname>"
-        initialValue: "{{.SelectedRemote.Name}} {{.SelectedLocalBranch.Name}}"
+        initialValue: "{{.SelectedRemote.Name}} {{.CheckedOutBranch.Name}}"
   - key: "<c-r>"
     command: "gh pr create --web"
     context: "global"
