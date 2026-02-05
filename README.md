@@ -1,6 +1,6 @@
 # dotfiles
 
-Managed by chezmoi.
+Managed by [chezmoi](https://www.chezmoi.io/).
 
 ## new machine
 
@@ -16,7 +16,7 @@ The `run_once` script installs Homebrew and runs `brew bundle install` on first 
 ## daily use
 
 ```sh
-chezmoi apply          # deploy managed files
+chezmoi apply -v       # deploy managed files
 chezmoi diff           # preview what apply would change
 chezmoi status         # list managed files that differ
 chezmoi add ~/.foo     # start managing a new file
