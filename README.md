@@ -6,7 +6,7 @@ Managed by [chezmoi](https://www.chezmoi.io/).
 
 ```sh
 brew install chezmoi
-chezmoi init --repo <git-clone-url>
+chezmoi init --repo git@github.com:darcien/dotfiles.git
 chezmoi apply
 ```
 
