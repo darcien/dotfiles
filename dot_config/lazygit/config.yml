@@ -15,7 +15,7 @@ customCommands:
     description: "Amend the author of last commit"
     command: 'git commit --amend --author="{{index .PromptResponses 0}} <{{index .PromptResponses 1}}>"'
     context: "commits"
-    subprocess: true
+    output: terminal
     prompts:
       - type: "input"
         title: "Author Name"
@@ -27,4 +27,4 @@ customCommands:
     description: "Amend last commit without edit and verify"
     command: "git commit --amend --no-edit --no-verify"
     context: "files"
-    subprocess: true
+    output: terminal

@@ -1,0 +1,30 @@
+[user]
+	name = Yosua Ian Sebastian
+	email = git@darcien.me
+[init]
+	defaultBranch = master
+[alias]
+	co = checkout
+	s = status -s
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+	lgt = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --tags
+[merge]
+	conflictstyle = zdiff3
+[credential "https://github.com"]
+	helper = !gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = !gh auth git-credential
+[diff]
+	algorithm = histogram
+	colorMoved = default
+[log]
+	date = iso
+[core]
+	pager = delta
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	navigate = true  # use n and N to move between diff sections
+	dark = true      # or light = true, or omit for auto-detection
+	side-by-side = true
+	true-color = always
