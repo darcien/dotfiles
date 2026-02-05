@@ -1,6 +1,6 @@
 customCommands:
   - key: "<c-p>"
-    command: "git push -u {{index .PromptResponses 0}} --no-verify --force-with-lease"
+    command: "git push -u {{index .PromptResponses 0}} --no-verify --force-with-lease --force-if-includes"
     context: "files"
     description: "Push without verify and force with lease"
     prompts:
