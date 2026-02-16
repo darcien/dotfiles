@@ -1,5 +1,6 @@
 # shared
 brew "bat"
+brew "btop"
 brew "build-essential"
 brew "delta"
 brew "fnm"
