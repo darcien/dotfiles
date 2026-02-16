@@ -1,7 +1,9 @@
 # shared
 brew "bat"
+brew "build-essential"
 brew "delta"
 brew "fnm"
+brew "gcc"
 brew "gh"
 brew "lazydocker"
 brew "lazygit"
