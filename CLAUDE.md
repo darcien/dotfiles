@@ -3,11 +3,8 @@
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 <important-instruction>
-- No emoji
-- No fluffs
 - No destructive action unless have backup and confirmed
 </important-instruction>
-
 
 ## What this repo is
 
