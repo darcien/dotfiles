@@ -45,7 +45,6 @@ so move its lines into `~/.zshrc.local` after installing.
 
 - [Rust](https://www.rust-lang.org) — `curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh` (rustup adds `.cargo/env` to every profile it finds)
 - [Deno](https://deno.land) — `curl -fsSL https://deno.land/install.sh | sh` (adds env source + completions)
-- [asdf](https://asdf-vm.com) — `brew install asdf` (adds shims PATH)
 
 ## adding packages
 

@@ -26,11 +26,6 @@ export LC_ALL=en_US.UTF-8
 # https://github.com/starship/starship
 eval "$(starship init zsh)"
 
-# fnm
-# eval "$(fnm env)"
-# switch to use-on-cd on 2024-01-21 so node version is always correct on different project
-eval "$(fnm env --use-on-cd)"
-
 # local user bin
 export PATH="$HOME/.local/bin:$PATH"
 
@@ -88,6 +83,9 @@ zstyle ':completion:*' menu select
 # better ctrl-r history
 # https://github.com/cantino/mcfly
 eval "$(mcfly init zsh)"
+
+# https://mise.jdx.dev
+eval "$(mise activate zsh)"
 
 # machine-local config: tools that auto-inject (LM Studio, deno, etc.) go here
 # chezmoi does not manage this file
