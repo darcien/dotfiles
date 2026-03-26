@@ -10,8 +10,12 @@ chezmoi init --repo git@github.com:darcien/dotfiles.git
 chezmoi apply
 ```
 
-Linux: install build-essential / gcc before `chezmoi apply` (brew needs it).
 The `run_once` script installs Homebrew and runs `brew bundle install` on first apply.
+
+### Linux
+
+- Install build-essential / gcc before `chezmoi apply` (brew needs it).
+- Font `font-fantasque-sans-mono-nerd-font` is a macOS cask — install it manually on Linux.
 
 ## daily use
 

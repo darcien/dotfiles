@@ -13,5 +13,6 @@ brew "micro"
 brew "starship"
 
 if RUBY_PLATFORM =~ /darwin/
+  cask "font-fantasque-sans-mono-nerd-font"
   cask "iterm2"
 end
