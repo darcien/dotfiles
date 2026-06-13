@@ -1,16 +1,19 @@
-# shared
 brew "bat"
 brew "btop"
 brew "build-essential"
 brew "delta"
+brew "doggo"
 brew "gcc"
 brew "gh"
+brew "git"
+brew "just"
 brew "lazydocker"
 brew "lazygit"
 brew "lsd"
 brew "mcfly"
 brew "micro"
 brew "starship"
+brew "tlrc"
 
 if RUBY_PLATFORM =~ /darwin/
   cask "font-fantasque-sans-mono-nerd-font"
