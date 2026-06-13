@@ -12,6 +12,7 @@ brew "lazygit"
 brew "lsd"
 brew "mcfly"
 brew "micro"
+brew "rtk"
 brew "starship"
 brew "tlrc"
 

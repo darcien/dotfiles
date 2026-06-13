@@ -4,3 +4,5 @@
 - Goal-driven: define verifiable success criteria, plan multi-step tasks.
 - Communication: be concise, less fluff. No emoji and no overstyling like bold unless requested.
 - Do not write to memory.
+
+@RTK.md

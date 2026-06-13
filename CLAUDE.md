@@ -54,6 +54,19 @@ Managed by chezmoi: shell configs (zsh, bash, profile), `.gitconfig`, `lazygit/c
 
 Not managed (in `.chezmoiignore`): `Brewfile`, `README.md`, `com.googlecode.iterm2.plist`.
 
+## rtk (Rust Token Killer)
+
+`rtk init` creates `dot_claude/RTK.md` and injects into `dot_claude/CLAUDE.md` (the `@RTK.md` import) and
+`dot_claude/settings.json` (the PreToolUse hook); those two files also hold unrelated config. The injected
+results are managed declaratively here — `brew bundle` installs the binary, `chezmoi apply` deploys the
+files, so a fresh machine needs no `rtk init`. Only re-run it when upgrading rtk changes its output, then
+recapture:
+
+```sh
+rtk init -g --auto-patch   # non-interactive; rewrites the live ~/.claude files
+chezmoi re-add ~/.claude/CLAUDE.md ~/.claude/settings.json ~/.claude/RTK.md
+```
+
 ## Template files
 
 Any `.tmpl` file is processed as a Go template before deployment.
