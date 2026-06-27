@@ -16,8 +16,10 @@
       "Read(./secrets/**)",
       "Read(./config/credentials.json)",
       "Read(./build)"
-    ]
+    ],
+    "defaultMode": "default"
   },
+  "model": "opus",
   "hooks": {
     "PreToolUse": [
       {
@@ -39,7 +41,8 @@
     "claude-hud@claude-hud": true,
     "rust-analyzer-lsp@claude-plugins-official": true,
     "gopls-lsp@claude-plugins-official": true,
-    "skill-creator@claude-plugins-official": true
+    "skill-creator@claude-plugins-official": true,
+    "caveman@caveman": true
   },
   "extraKnownMarketplaces": {
     "claude-hud": {
@@ -47,8 +50,15 @@
         "source": "github",
         "repo": "jarrodwatts/claude-hud"
       }
+    },
+    "caveman": {
+      "source": {
+        "source": "github",
+        "repo": "JuliusBrussee/caveman"
+      }
     }
   },
   "effortLevel": "medium",
-  "model": "opus"
+  "awaySummaryEnabled": false,
+  "tui": "fullscreen"
 }
