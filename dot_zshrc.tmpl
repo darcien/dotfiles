@@ -4,6 +4,9 @@ fi
 
 export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 
+# Don't auto-upgrade casks with `auto_updates true` on `brew upgrade`
+export HOMEBREW_NO_UPGRADE_AUTO_UPDATES_CASKS=1
+
 # Prefer ls deluxe over regular ls
 # https://github.com/Peltoche/lsd
 alias ls='lsd'
