@@ -2,7 +2,7 @@
 	name = Yosua Ian Sebastian
 	email = git@darcien.me
 [init]
-	defaultBranch = master
+	defaultBranch = main
 [alias]
 	co = checkout
 	s = status -s
