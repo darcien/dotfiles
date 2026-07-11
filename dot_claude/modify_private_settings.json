@@ -1,0 +1,7 @@
+# chezmoi:modify-template
+{{- $live := dict -}}
+{{- if .chezmoi.stdin -}}
+{{-   $live = .chezmoi.stdin | fromJson -}}
+{{- end -}}
+{{- $managed := include "dot_claude/settings.managed.json" | fromJson -}}
+{{- mergeOverwrite $live $managed | toPrettyJson -}}

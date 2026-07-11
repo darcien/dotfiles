@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to AI agents working with code in this repository.
 
 <important-instruction>
 - No destructive action unless have backup and confirmed
@@ -10,65 +10,66 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 A [chezmoi](https://www.chezmoi.io/) dotfiles repo.
 Chezmoi deploys managed files from this source directory (`~/.local/share/chezmoi`) into the home directory.
-Files here are **not** the live copies — `chezmoi apply` copies them out.
+Files here are not the live copies — `chezmoi apply` copies them out.
 
-## Key commands
+## Day-to-day commands
 
 ```sh
-chezmoi apply -v       # deploy managed files to ~
-chezmoi diff           # preview what apply would change
 chezmoi status         # list managed files that differ from source
+chezmoi diff           # preview what apply would change
+chezmoi apply -v       # deploy managed files to ~
 chezmoi add ~/.foo     # start managing a new file
 chezmoi edit ~/.zshrc  # edit source and apply in one step
 chezmoi cd             # open shell in source dir
 ```
 
-Adding a new Homebrew package: edit `Brewfile`, then run:
-```sh
-brew bundle install --file ~/.local/share/chezmoi/Brewfile
-```
-
 ## File naming conventions
 
-Chezmoi uses special prefixes/suffixes to map source files to destinations:
-
 - `dot_` → `.` (e.g. `dot_zshrc` → `~/.zshrc`)
-- `.tmpl` suffix → file is a Go template, processed before deployment
+- `private_` → file mode 600
+- `.tmpl` suffix → Go template, processed before deployment (main use: OS conditionals).
+  Verify rendered output with `chezmoi diff` before applying.
 - `run_once_` prefix → script runs only once (tracked by chezmoi)
 - Files in `dot_config/` → `~/.config/`
 
-## Machine-local overrides pattern
+## Volatile configs (live vs managed drift)
 
-Tools like OrbStack, LM Studio, deno, and rustup auto-inject lines into shell files.
-Since `chezmoi apply` overwrites those files, the managed shell configs source unmanaged `.local` counterparts:
+Some configs are rewritten by tools at runtime, so tracking them verbatim means constant
+drift and `chezmoi apply` clobbering live changes. Two patterns handle this:
 
-- `~/.zshrc` sources `~/.zshrc.local`
-- `~/.zprofile` sources `~/.zprofile.local`
+1. Sourced `.local` counterpart — for configs where lines can be split out.
+Managed shell files source unmanaged local files; auto-injected or sensitive lines go there:
+
+- `~/.zshrc` sources `~/.zshrc.local` (deno, LM Studio, etc.)
+- `~/.zprofile` sources `~/.zprofile.local` (OrbStack, rustup)
 - `~/.secrets.local` for secrets
 
-Any auto-injected or sensitive config belongs in the `.local` files, not in the chezmoi-managed source.
+2. `modify_` merge template — for single-file configs (e.g. JSON) the tool rewrites in place.
+The source holds only curated keys; a `chezmoi:modify-template` deep-merges them over the live
+file on apply. Curated keys win, untracked keys pass through untouched.
 
-## What is and is not managed
+Current instance: `~/.claude/settings.json` (Claude Code live-writes keys like `model`):
 
-Managed by chezmoi: shell configs (zsh, bash, profile), `.gitconfig`, `lazygit/config.yml`, Homebrew install script.
+- `dot_claude/settings.managed.json` — curated keys only. In `.chezmoiignore`, never deployed itself.
+- `dot_claude/modify_private_settings.json` — the merge template (`mergeOverwrite`, output is
+  sorted pretty JSON).
 
-Not managed (in `.chezmoiignore`): `Brewfile`, `README.md`, `com.googlecode.iterm2.plist`.
+Ops for a `modify_` target:
+
+- Change enforced config: edit the managed JSON, `chezmoi apply`.
+- Adopt a live value into managed: copy the key into the managed JSON manually (or with jq).
+- `chezmoi re-add` does not work on these targets.
+- `chezmoi diff` empty = no drift; nonempty = apply (enforce) or promote (adopt), your call.
 
 ## rtk (Rust Token Killer)
 
-`rtk init` creates `dot_claude/RTK.md` and injects into `dot_claude/CLAUDE.md` (the `@RTK.md` import) and
-`dot_claude/settings.json` (the PreToolUse hook); those two files also hold unrelated config. The injected
-results are managed declaratively here — `brew bundle` installs the binary, `chezmoi apply` deploys the
-files, so a fresh machine needs no `rtk init`. Only re-run it when upgrading rtk changes its output, then
-recapture:
+`rtk init` injects into `~/.claude/CLAUDE.md` (`@RTK.md` import), `~/.claude/RTK.md`, and
+`~/.claude/settings.json` (PreToolUse hook). All three are captured in source, so a fresh machine
+needs no `rtk init`. Only re-run it when upgrading rtk changes its output, then recapture:
 
 ```sh
 rtk init -g --auto-patch   # non-interactive; rewrites the live ~/.claude files
-chezmoi re-add ~/.claude/CLAUDE.md ~/.claude/settings.json ~/.claude/RTK.md
+chezmoi re-add ~/.claude/CLAUDE.md ~/.claude/RTK.md
+# settings.json is a modify_ target: copy the changed hook from ~/.claude/settings.json
+# into dot_claude/settings.managed.json by hand, then chezmoi apply
 ```
-
-## Template files
-
-Any `.tmpl` file is processed as a Go template before deployment.
-The main use here is OS conditionals — e.g. different path on macOS `{{ if eq .chezmoi.os "darwin" }}`.
-Use `chezmoi diff` to verify the rendered output before applying.

@@ -17,9 +17,8 @@
       "Read(./config/credentials.json)",
       "Read(./build)"
     ],
-    "defaultMode": "default"
+    "defaultMode": "auto"
   },
-  "model": "opus",
   "hooks": {
     "PreToolUse": [
       {
@@ -38,9 +37,7 @@
     "command": "bash -c '\"/opt/homebrew/bin/bun\" \"$(ls -td ~/.claude/plugins/cache/claude-hud/claude-hud/*/ 2>/dev/null | head -1)src/index.ts\"'"
   },
   "enabledPlugins": {
-    "claude-hud@claude-hud": true,
-    "rust-analyzer-lsp@claude-plugins-official": true,
-    "gopls-lsp@claude-plugins-official": true,
+    "claude-hud@claude-hud": false,
     "skill-creator@claude-plugins-official": true,
     "caveman@caveman": true
   },
