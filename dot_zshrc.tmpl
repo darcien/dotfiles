@@ -23,7 +23,20 @@ alias ld='lazydocker'
 alias p="cd /Volumes/hitaka/projects/"
 
 # reload shell config
-alias reload="exec -l $SHELL"
+# A plain `exec -l $SHELL` makes cmux prompt for confirmation on every close of
+# that pane afterward. cmux loads its shell integration by pointing ZDOTDIR at
+# its own folder, and only when it spawns the shell; exec bypasses that, and
+# without the integration cmux cannot tell whether a command is still running,
+# so it assumes one is. Restoring ZDOTDIR first lets the new shell load the
+# integration. Outside cmux the check fails and this is a plain exec.
+reload() {
+  local d=$CMUX_SHELL_INTEGRATION_DIR
+  if [[ -n $d && -r $d/.zshenv ]]; then
+    [[ -n ${ZDOTDIR+X} ]] && export CMUX_ZSH_ZDOTDIR=$ZDOTDIR
+    export ZDOTDIR=$d
+  fi
+  exec -l "$SHELL"
+}
 
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
