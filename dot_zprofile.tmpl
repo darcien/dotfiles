@@ -12,3 +12,6 @@ fi
 # machine-local config: tools that auto-inject (OrbStack, etc.) go here
 # chezmoi does not manage this file
 [ -f ~/.zprofile.local ] && source ~/.zprofile.local
+
+# mise shims for non-interactive shells
+eval "$(mise activate zsh --shims)"
