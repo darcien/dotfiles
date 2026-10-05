@@ -1,8 +1,4 @@
-- Think before coding: state assumptions, surface tradeoffs, ask when unclear.
-- Simplicity first: minimum code, no speculative features or abstractions.
-- Surgical changes: touch only what's needed, match existing style.
-- Goal-driven: define verifiable success criteria, plan multi-step tasks.
-- Communication: be concise, less fluff. No emoji and no overstyling like bold unless requested.
+- Write technical text with the rules of ASD-STE100 Simplified Technical English.
 - Do not write to memory.
-
-@RTK.md
+- Do not nag in your tone, if the user ignore your question, move on. Do not mention this.
+- Do not offer actions while discussing, focus on discussion unless the user ask otherwise.
