@@ -28,3 +28,5 @@
 	dark = true      # or light = true, or omit for auto-detection
 	side-by-side = true
 	true-color = always
+[commit]
+	gpgsign = false
