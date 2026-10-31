@@ -1,4 +1,3 @@
 Brewfile
 *.md
 com.googlecode.iterm2.plist
-.claude/settings.managed.json

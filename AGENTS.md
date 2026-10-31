@@ -32,31 +32,11 @@ chezmoi cd             # open shell in source dir
 - `run_once_` prefix → script runs only once (tracked by chezmoi)
 - Files in `dot_config/` → `~/.config/`
 
-## Volatile configs (live vs managed drift)
+## Machine-local lines
 
-Some configs are rewritten by tools at runtime, so tracking them verbatim means constant
-drift and `chezmoi apply` clobbering live changes. Two patterns handle this:
+Managed shell files source unmanaged `.local` files.
+Put auto-injected or secret lines there, not in the managed file:
 
-1. Sourced `.local` counterpart — for configs where lines can be split out.
-Managed shell files source unmanaged local files; auto-injected or sensitive lines go there:
-
-- `~/.zshrc` sources `~/.zshrc.local` (deno, LM Studio, etc.)
-- `~/.zprofile` sources `~/.zprofile.local` (OrbStack, rustup)
-- `~/.secrets.local` for secrets
-
-2. `modify_` merge template — for single-file configs (e.g. JSON) the tool rewrites in place.
-The source holds only curated keys; a `chezmoi:modify-template` deep-merges them over the live
-file on apply. Curated keys win, untracked keys pass through untouched.
-
-Current instance: `~/.claude/settings.json` (Claude Code live-writes keys like `model`):
-
-- `dot_claude/settings.managed.json` — curated keys only. In `.chezmoiignore`, never deployed itself.
-- `dot_claude/modify_private_settings.json` — the merge template (`mergeOverwrite`, output is
-  sorted pretty JSON).
-
-Ops for a `modify_` target:
-
-- Change enforced config: edit the managed JSON, `chezmoi apply`.
-- Adopt a live value into managed: copy the key into the managed JSON manually (or with jq).
-- `chezmoi re-add` does not work on these targets.
-- `chezmoi diff` empty = no drift; nonempty = apply (enforce) or promote (adopt), your call.
+- `~/.zshrc.local` (deno, LM Studio, etc.)
+- `~/.zprofile.local` (OrbStack, rustup)
+- `~/.secrets.local` (secrets)
