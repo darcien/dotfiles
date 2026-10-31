@@ -38,6 +38,12 @@ reload() {
   exec -l "$SHELL"
 }
 
+# npx is banned, stupid LLM keep trying to run random packages
+npx() {
+  print -u2 "npx: blocked. Use a pinned dependency."
+  return 1
+}
+
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
