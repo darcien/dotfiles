@@ -1,0 +1,19 @@
+# McFly colors for a dark terminal.
+# McFly accepts only the 16 ANSI names and "reset". It changes other values, such as hex, to white.
+# The terminal palette sets the real colors.
+
+[colors.menubar]
+bg = "reset"
+fg = "white"
+
+[colors.darkmode]
+prompt = "reset"
+# Timing has no selected-row color, so this color must show on the terminal background and on results_selection_bg.
+# "black" is ANSI 0. If ANSI 0 is too dark for the terminal background, unselected rows show no timing.
+timing = "black"
+results_fg = "reset"
+results_bg = "reset"
+results_hl = "dark_cyan"
+results_selection_bg = "dark_yellow"
+results_selection_fg = "black"
+results_selection_hl = "black"

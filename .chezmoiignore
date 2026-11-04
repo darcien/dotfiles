@@ -1,3 +1,9 @@
 Brewfile
 *.md
 com.googlecode.iterm2.plist
+{{ if ne .chezmoi.os "darwin" }}
+Library/Application Support/McFly/config.toml
+{{ end }}
+{{ if ne .chezmoi.os "linux" }}
+.local/share/mcfly/config.toml
+{{ end }}
