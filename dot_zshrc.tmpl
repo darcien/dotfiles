@@ -71,6 +71,8 @@ setopt NO_NOMATCH
 setopt HIST_IGNORE_SPACE
 
 # zsh history options - https://postgresqlstan.github.io/cli/zsh-history-options/
+# zsh writes no history to disk without this, and not every OS sets it. Not exported, or child bash shells write here too.
+HISTFILE="${HISTFILE:-$HOME/.zsh_history}"
 SAVEHIST=9000
 HISTSIZE=9999                   # set HISTSIZE > SAVEHIST
 
